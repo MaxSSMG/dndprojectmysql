@@ -30,17 +30,17 @@ export function useMisc() {
 
       // Create Classes
       const classes = [
-        { name: "Guerrero", description: "Maestro a melee" },
-        { name: "Mago", description: "Maestro en la magia" },
-        { name: "Pícaro", description: "Maestro de sigilo" },
+        { name: "Guerrero", dadoVida: "1d12" },
+        { name: "Mago", dadoVida: "1d6" },
+        { name: "Pícaro", dadoVida: "1d8" },
       ];
 
       const classIds = [];
 
       for (const clase of classes) {
         const result = await executeQuery(
-          `INSERT IGNORE INTO Clase (nombre, descripcion) VALUES (?, ?)`,
-          [clase.name, clase.description]
+          `INSERT IGNORE INTO Clase (nombre, dadoVida) VALUES (?, ?)`,
+          [clase.name, clase.dadoVida]
         );
         classIds.push(result.result.lastInsertRowid || result.result.insertId);
       }
