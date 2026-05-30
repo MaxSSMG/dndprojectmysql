@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export function useMySQL() {
   const isLoading = ref(false);
@@ -16,7 +16,7 @@ export function useMySQL() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ sql, params }),
+        body: JSON.stringify({ query: sql }),
       });
 
       if (!response.ok) {
