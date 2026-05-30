@@ -62,7 +62,7 @@ app.post('/api/query', async (req, res) => {
     const [results] = await connection.query(interpolatedQuery);
     connection.release();
 
-    res.json(results);
+    res.json({ success: true, result: results });
   } catch (error) {
     console.error('Database error:', error);
     res.status(500).json({ error: error.message });
