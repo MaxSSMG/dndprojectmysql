@@ -32,6 +32,11 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
+console.log('DB_HOST:', process.env.DB_HOST);
+console.log('DB_USER:', process.env.DB_USER);
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? '***' : 'undefined');
+console.log('DB_NAME:', process.env.DB_NAME);
+
 // API Routes
 app.post('/api/query', async (req, res) => {
   try {
