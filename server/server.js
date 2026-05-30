@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import mysql from 'mysql2/promise.js';
+import { escape } from 'mysql2';
 
 dotenv.config();
 
@@ -40,8 +41,18 @@ app.post('/api/query', async (req, res) => {
       return res.status(400).json({ error: 'Query is required' });
     }
 
+    // Manually substitute ? placeholders with escaped values so MySQL
+    // receives a fully-formed query string with no literal ? characters.
+    let paramIndex = 0;
+    const interpolatedQuery = query.replace(/\?/g, () => {
+      if (paramIndex >= params.length) {
+        throw new Error('Not enough parameters provided for query placeholders');
+      }
+      return escape(params[paramIndex++]);
+    });
+
     const connection = await pool.getConnection();
-    const [results] = await connection.query(query, params);
+    const [results] = await connection.query(interpolatedQuery);
     connection.release();
 
     res.json(results);
