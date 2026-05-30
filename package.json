@@ -10,7 +10,8 @@
     "server": "cd server && npm start",
     "build": "vite build",
     "preview": "vite preview",
-    "server:install": "cd server && npm install"
+    "server:install": "cd server && npm install",
+    "start": "npm run build && node server/server.js"
   },
   "dependencies": {
     "@sqlite.org/sqlite-wasm": "^3.51.2-build8",

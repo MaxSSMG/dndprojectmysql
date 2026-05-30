@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql2/promise.js';
 import dotenv from 'dotenv';
+import path from 'node:path';
 
 dotenv.config();
 
@@ -11,14 +12,42 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+function parseDatabaseConfig() {
+  if (process.env.DATABASE_URL) {
+    try {
+      const url = new URL(process.env.DATABASE_URL);
+      return {
+        host: url.hostname,
+        port: url.port ? Number(url.port) : 3306,
+        user: decodeURIComponent(url.username),
+        password: decodeURIComponent(url.password),
+        database: url.pathname ? url.pathname.replace(/^\//, '') : undefined,
+      };
+    } catch (err) {
+      console.error('Failed to parse DATABASE_URL:', err.message);
+    }
+  }
+
+  return {
+    host: process.env.DB_HOST || 'mysql.railway.internal',
+    port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 3306,
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || 'projectdnd',
+  };
+}
+
+const dbConfig = parseDatabaseConfig();
+
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'mysql.railway.internal',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'bdjcXDIUQNunEqBjGofxTuKxuVBPbHKU',
-  database: process.env.DB_NAME || 'projectdnd',
+  host: dbConfig.host,
+  port: dbConfig.port,
+  user: dbConfig.user,
+  password: dbConfig.password,
+  database: dbConfig.database,
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
 });
 
 pool.getConnection()
@@ -323,9 +352,22 @@ app.post('/api/campaigns/:campaignId/add-character/:characterId', async (req, re
 });
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' });
+  res.json({ status: 'ok', port: PORT });
 });
 
+const distPath = path.resolve(process.cwd(), 'dist');
+try {
+  app.use(express.static(distPath));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+  console.log('Static frontend serving enabled from', distPath);
+} catch (err) {
+  console.log('Static frontend not available:', err.message);
+}
+
 app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
+  console.log(`DB host: ${dbConfig.host} (port ${dbConfig.port}), DB name: ${dbConfig.database}`);
 });
