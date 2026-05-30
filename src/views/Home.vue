@@ -4,7 +4,7 @@ import Footer from "@/components/Footer.vue";
 import Popup from "@/components/Popup.vue";
 import { useMisc } from "@/composables/useMisc";
 import { useCampaigns } from "@/composables/useCampaigns";
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from "vue"
 
 const { campaigns, campaignsIn, loadUsersCampaigns, campaignMember } =
   useCampaigns();
@@ -24,6 +24,7 @@ onMounted(async () => {
 
   await loadUsersCampaigns($cookies.get("userId"));
   await campaignMember($cookies.get("userId"));
+  await demoData();
 });
 </script>
 

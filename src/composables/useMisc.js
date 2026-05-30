@@ -39,7 +39,7 @@ export function useMisc() {
 
       for (const clase of classes) {
         const result = await executeQuery(
-          `INSERT INTO Clase (nombre, descripcion) VALUES (?, ?)`,
+          `INSERT OR IGNORE INTO Clase (nombre, descripcion) VALUES (?, ?)`,
           [clase.name, clase.description]
         );
         classIds.push(result.result.lastInsertRowid || result.result.insertId);
@@ -93,14 +93,14 @@ export function useMisc() {
 
       for (const ability of abilities) {
         const result = await executeQuery(
-          `INSERT INTO Habilidad (nombre, danyo, bonus, descripcion) VALUES (?, ?, ?, ?)`,
+          `INSERT OR IGNORE INTO Habilidad (nombre, danyo, bonus, descripcion) VALUES (?, ?, ?, ?)`,
           [ability.nombre, ability.danyo, ability.bonus, ability.descripcion]
         );
 
         const abilityId = result.result.lastInsertRowid || result.result.insertId;
 
         await executeQuery(
-          `INSERT INTO Clase_tiene_Habilidad (Clase_id, Habilidad_id) VALUES (?, ?)`,
+          `INSERT OR IGNORE INTO Clase_tiene_Habilidad (Clase_id, Habilidad_id) VALUES (?, ?)`,
           [ability.clase, abilityId]
         );
       }
