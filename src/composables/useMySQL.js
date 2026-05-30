@@ -16,7 +16,7 @@ export function useMySQL() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query: sql }),
+        body: JSON.stringify({ query: sql, params }),
       });
 
       if (!response.ok) {
