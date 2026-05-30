@@ -34,14 +34,14 @@ const pool = mysql.createPool({
 // API Routes
 app.post('/api/query', async (req, res) => {
   try {
-    const { query } = req.body;
+    const { query, params = [] } = req.body;
     
     if (!query) {
       return res.status(400).json({ error: 'Query is required' });
     }
 
     const connection = await pool.getConnection();
-    const [results] = await connection.query(query);
+    const [results] = await connection.query(query, params);
     connection.release();
 
     res.json(results);
