@@ -1,7 +1,7 @@
-import { useSQLite } from "@/composables/useSQLite";
+import { useMySQL } from "@/composables/useMySQL";
 
 export function useMisc() {
-  const { executeQuery } = useSQLite();
+  const { executeQuery } = useMySQL();
 
   async function drop() {
     const result = await executeQuery(`
