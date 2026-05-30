@@ -36,6 +36,8 @@ const pool = mysql.createPool({
 app.post('/api/query', async (req, res) => {
   try {
     const { query, params = [] } = req.body;
+    console.log('Received query:', query);
+    console.log('Received params:', params);
     
     if (!query) {
       return res.status(400).json({ error: 'Query is required' });
