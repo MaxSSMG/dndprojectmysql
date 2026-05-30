@@ -62,11 +62,29 @@ app.post('/api/query', async (req, res) => {
     const [results] = await connection.query(interpolatedQuery);
     connection.release();
 
-    res.json({ success: true, result: results });
+    let resultPayload;
+    if (Array.isArray(results)) {
+      resultPayload = {
+        resultRows: results.map(row => Object.values(row)),
+      };
+    } else {
+      resultPayload = {
+        insertId: results.insertId,
+        affectedRows: results.affectedRows,
+        warningStatus: results.warningStatus,
+      };
+    }
+
+    res.json({ success: true, result: resultPayload });
   } catch (error) {
     console.error('Database error:', error);
     res.status(500).json({ error: error.message });
   }
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', port: PORT });
 });
 
 // Serve frontend for all other routes (SPA fallback)

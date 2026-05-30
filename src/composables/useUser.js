@@ -41,7 +41,8 @@ export function useUser() {
         "SELECT nombre FROM Usuario WHERE id = ?",
         [id],
       );
-      return result.result.resultRows[0][0]
+      const rows = result?.result?.resultRows || [];
+      return rows.length > 0 ? rows[0][0] : null;
     } catch (err) {
       console.log(err);
     }
