@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { useSQLite } from "@/composables/useSQLite";
+import { useMySQL } from "@/composables/useMySQL";
 
 export function useCampaigns() {
   const campaign = ref(null);
@@ -7,7 +7,7 @@ export function useCampaigns() {
   const campaigns = ref(null);
   const campaignsIn = ref(null);
 
-  const { executeQuery } = useSQLite();
+  const { executeQuery } = useMySQL();
 
   async function loadCampaigns(id) {
     try {

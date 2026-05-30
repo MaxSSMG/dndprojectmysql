@@ -1,10 +1,10 @@
 import { ref } from "vue";
-import { useSQLite } from "@/composables/useSQLite";
+import { useMySQL } from "@/composables/useMySQL";
 
 export function useHabilidades() {
   const habilidades = ref(null);
 
-  const { executeQuery } = useSQLite();
+  const { executeQuery } = useMySQL();
 
   async function loadHabilidades(id) {
     try {

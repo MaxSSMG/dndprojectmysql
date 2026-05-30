@@ -1,8 +1,8 @@
 import { ref } from "vue";
-import { useSQLite } from "@/composables/useSQLite";
+import { useMySQL } from "@/composables/useMySQL";
 
 export function useStats() {
-  const { executeQuery } = useSQLite();
+  const { executeQuery } = useMySQL();
 
   async function createStats(str, dex, con, int, wis, cha) {
     try {

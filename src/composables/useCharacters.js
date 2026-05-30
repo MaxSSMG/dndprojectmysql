@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { useSQLite } from "@/composables/useSQLite";
+import { useMySQL } from "@/composables/useMySQL";
 
 export function useCharacters() {
   const character = ref(null);
@@ -8,7 +8,7 @@ export function useCharacters() {
   const abilityScores = ref(null);
   const campaign = ref(null);
 
-  const { executeQuery } = useSQLite();
+  const { executeQuery } = useMySQL();
 
   async function loadCharacterFromId(id) {
     try {
