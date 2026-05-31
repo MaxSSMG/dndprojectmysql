@@ -9,6 +9,9 @@ const router = useRouter();
 const handleLogin = async () => {
   let username = document.getElementById("username");
   let password = document.getElementById("password");
+  if (!username.value || !password.value) {
+    return;
+  }
   await login(username.value, password.value);
   router.push("/");
 };
@@ -16,7 +19,11 @@ const handleLogin = async () => {
 const handleRegister = () => {
   let username = document.getElementById("username");
   let password = document.getElementById("password");
+  if (!username.value || !password.value) {
+    return;
+  }
   register(username.value, password.value);
+  handleLogin();
 };
 
 </script>

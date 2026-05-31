@@ -32,7 +32,7 @@
       />
     </div>
     <button @click="rollStats">Volver a tirar</button>
-    <button @click="create()">Crear el personaje</button>
+    <button @click="create()">Editar el personaje</button>
   </div>
   <Footer />
 </template>

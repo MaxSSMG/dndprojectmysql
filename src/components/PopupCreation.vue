@@ -24,6 +24,11 @@ const emit = defineEmits(["close"]);
       <p>Debes ingresar un nombre para el personaje.</p>
     </div>
 
+    <div v-if="type === 'nombreCampaña'">
+      <h2>Nombre cambiado</h2>
+      <p>Se ha cambiado el nombre de la campaña.</p>
+    </div>
+
     <button class="btn btn-danger" @click="emit('close')">
       Cerrar
     </button>

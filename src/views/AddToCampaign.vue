@@ -16,7 +16,7 @@ const {
 
 async function handleAdding(character) {
   await addToCampaign(route.params.id, character)
-  router.push("/CampaignOverview/"+route.params.id)
+  router.push("/MyCampaigns")
 }
 
 onMounted(async () => {
@@ -27,6 +27,7 @@ onMounted(async () => {
 
 <template>
   <Header />
+  <h2>Añadir personaje a la campaña</h2>
   <div class="content addToCampaign row" v-if="characters">
     <div v-for="character in characters" :key="character.charId"
       class="d-flex flex-column col-4 justify-content-center p-3">
