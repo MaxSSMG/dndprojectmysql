@@ -17,6 +17,8 @@ export function useUser() {
         const userId = rows[0][0];
         $cookies.set("userId", userId, "1h");
       }
+
+      return rows;
     } catch (err) {
       console.log(err);
     }
