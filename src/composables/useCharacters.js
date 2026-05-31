@@ -24,7 +24,7 @@ export function useCharacters() {
           s.str,
           s.dex,
           s.con,
-          s.int,
+          s.intel,
           s.wis,
           s.cha,
           ca.id,

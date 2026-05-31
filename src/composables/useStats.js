@@ -6,7 +6,7 @@ export function useStats() {
   async function createStats(str, dex, con, int, wis, cha) {
     try {
       const result = await executeQuery(
-        "INSERT INTO Stats (str, dex, con, int, wis, cha) VALUES (?, ?, ?, ?, ?, ?)",
+        "INSERT INTO Stats (str, dex, con, intel, wis, cha) VALUES (?, ?, ?, ?, ?, ?)",
         [str, dex, con, int, wis, cha],
       );
 
