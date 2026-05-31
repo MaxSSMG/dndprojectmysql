@@ -18,6 +18,7 @@ const handleLogin = async () => {
     return;
   }
   const log = await login(username.value, password.value);
+  console.log(log);
   if (log) {
     router.push("/");
   } else {
