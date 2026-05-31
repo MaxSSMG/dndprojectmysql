@@ -43,7 +43,7 @@ onMounted(() => {
       v-bind:key="campaign.campId"
       class="col-5"
     >
-      <div class="d-flex flex-row justify-content-start card mb-3 align-items-center campaignCard">
+      <div class="d-flex flex-row justify-content-start mb-3 align-items-center campaignCard">
         <div class="d-flex flex-column image">
           <img
             src="../assets/placeholder.png"
@@ -68,7 +68,7 @@ onMounted(() => {
       v-bind:key="campaign.campId"
       class="col-5"
     >
-      <div class="d-flex flex-row justify-content-start align-items-center card mb-3 campaignCard">
+      <div class="d-flex flex-row justify-content-start align-items-center mb-3 campaignCard">
         <div class="d-flex flex-column image">
           <img
             src="../assets/placeholder.png"
