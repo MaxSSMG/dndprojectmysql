@@ -316,7 +316,7 @@ div.container {
 div.content {
   max-width: 80%;
   margin: auto;
-  min-height: 100dvh;
+  /* min-height: 100dvh; */
 }
 
 .container:has(.login) {
