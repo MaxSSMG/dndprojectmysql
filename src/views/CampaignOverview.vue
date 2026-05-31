@@ -28,7 +28,7 @@ function isDM(campaignDm) {
 function handleEdit() {
   const name = document.getElementById("campaignName").value.trim();
   editCampaign(name, route.params.id);
-  campaign.value = name;
+  // campaign.value = name;
   popupType.value = "nombreCampaña";
   popupVisible.value = true;
 }
