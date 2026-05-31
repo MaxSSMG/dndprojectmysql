@@ -11,7 +11,7 @@ const router = useRouter();
 const handleCreate = async () => {
     await createCampaign($cookies.get("userId"));
     await getLastCampaign();
-    router.push("/CampaignOverview/"+lastCampaign.value.id)
+    router.push("/MyCampaigns")
 }
 
 const query = ref("")

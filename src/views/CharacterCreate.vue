@@ -43,16 +43,25 @@
     </div>
   </div>
   <Footer />
+  <PopupCreation
+  :visible="popupVisible"
+  :type="popupType"
+  @close="popupVisible = false"
+/>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+import PopupCreation from "@/components/PopupCreation.vue";
 import { useRouter } from "vue-router";
 import { useCharacters } from "@/composables/useCharacters";
 import { useClases } from "@/composables/useClases";
 import { useStats } from "@/composables/useStats";
+
+const popupVisible = ref(false);
+const popupType = ref("");
 
 const { createCharacter } = useCharacters();
 const { createStats } = useStats();
@@ -81,11 +90,26 @@ function rollStats() {
 async function create() {
   let nombre = document.getElementById("Nombre").value;
   let nivel = parseInt(document.getElementById("Nivel").value);
-  if (isNaN(nivel)) {
-    console.log("no")
-    return
-  }
   let clase = document.querySelector('input[name="clase"]:checked').value;
+
+  if (!nombre) {
+    popupType.value = "nombre";
+    popupVisible.value = true;
+    return;
+  }
+
+  if (isNaN(nivel)) {
+    popupType.value = "nivel";
+    popupVisible.value = true;
+    return;
+  }
+
+  if (!clase) {
+    popupType.value = "clase";
+    popupVisible.value = true;
+    return;
+  }
+
   let vida = document.querySelector('input[name="clase"]:checked').classList[0];
   const statValues = stats.value.map((stat) => stat.valor);
   const statsId = await createStats(...statValues);

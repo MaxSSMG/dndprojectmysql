@@ -6,6 +6,7 @@
       <div id="nav">
         <router-link to="/CharacterSelect">Personajes</router-link>
         <router-link to="/Campaigns">Campañas</router-link>
+        <router-link to="/MyCampaigns">Mis Campañas</router-link>
       </div>
       <div class="header-item d-flex flex-row">
         <p class="username m-0 me-3 text-light">{{ name }}</p>
