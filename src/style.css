@@ -567,3 +567,7 @@ Footer {
   text-decoration: none;
   border-radius: 8px;
 }
+
+h5.card-title {
+  width: fit-content;
+}
