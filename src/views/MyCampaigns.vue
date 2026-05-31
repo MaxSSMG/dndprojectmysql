@@ -43,9 +43,7 @@ onMounted(() => {
       v-bind:key="campaign.campId"
       class="col-5"
     >
-      <div
-        class="d-flex flex-row justify-content-start card mb-3 align-items-center"
-      >
+      <div class="d-flex flex-row justify-content-start card mb-3 align-items-center">
         <div class="d-flex flex-column image">
           <img
             src="../assets/placeholder.png"
@@ -55,7 +53,7 @@ onMounted(() => {
         </div>
         <router-link
           :to="'/CampaignOverview/' + campaign.campId"
-          class="d-flex flex-column justify-content-center ms-3"
+          class="d-flex flex-column justify-content-start ms-3"
         >
           <h5 class="card-title">{{ campaign.nombre }}</h5>
           <p class="card-text align-self-start">DM: {{ campaign.dm }}</p>
@@ -69,9 +67,7 @@ onMounted(() => {
       v-bind:key="campaign.campId"
       class="col-5"
     >
-      <div
-        class="d-flex flex-row justify-content-start card mb-3"
-      >
+      <div class="d-flex flex-row justify-content-start align-items-center card mb-3">
         <div class="d-flex flex-column image">
           <img
             src="../assets/placeholder.png"
@@ -79,10 +75,7 @@ onMounted(() => {
             class="placeholder-campaign"
           />
         </div>
-        <router-link
-          :to="'/CampaignOverview/' + campaign.campId"
-          class="d-flex flex-column justify-content-center ms-3"
-        >
+        <router-link :to="'/CampaignOverview/' + campaign.campId" class="d-flex flex-column justify-content-start ms-3">
           <h5 class="card-title">{{ campaign.nombre }}</h5>
           <p class="card-text align-self-start">DM: {{ campaign.dm }}</p>
         </router-link>
