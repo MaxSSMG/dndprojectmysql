@@ -43,11 +43,13 @@
     </div>
   </div>
   <Footer />
-  <PopupCreation
-  :visible="popupVisible"
-  :type="popupType"
-  @close="popupVisible = false"
-/>
+  <div v-if="popupVisible" class="popup-overlay">
+    <PopupCreation
+    :visible="popupVisible"
+    :type="popupType"
+    @close="popupVisible = false"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -90,7 +92,7 @@ function rollStats() {
 async function create() {
   let nombre = document.getElementById("Nombre").value;
   let nivel = parseInt(document.getElementById("Nivel").value);
-  let clase = document.querySelector('input[name="clase"]:checked').value;
+  let clase = document.querySelector('input[name="clase"]:checked')?.value;
 
   if (!nombre) {
     popupType.value = "nombre";

@@ -48,8 +48,6 @@ app.post('/api/query', async (req, res) => {
       return res.status(400).json({ error: 'Query is required' });
     }
 
-    // Manually substitute ? placeholders with escaped values so MySQL
-    // receives a fully-formed query string with no literal ? characters.
     let paramIndex = 0;
     const interpolatedQuery = query.replace(/\?/g, () => {
       if (paramIndex >= params.length) {
@@ -82,17 +80,14 @@ app.post('/api/query', async (req, res) => {
   }
 });
 
-// Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', port: PORT });
 });
 
-// Serve frontend for all other routes (SPA fallback)
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '../dist/index.html'));
 });
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
