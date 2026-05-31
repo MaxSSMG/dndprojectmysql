@@ -30,30 +30,30 @@ export function useMisc() {
 
       // Create Classes
       const classes = [
-        { name: "Guerrero", dadoVida: "1d12" },
-        { name: "Mago", dadoVida: "1d6" },
-        { name: "Pícaro", dadoVida: "1d8" },
+        { id: 1, name: "Guerrero", dadoVida: "1d12" },
+        { id: 2, name: "Mago", dadoVida: "1d6" },
+        { id: 3,name: "Pícaro", dadoVida: "1d8" },
       ];
 
-      const classIds = [];
 
       for (const clase of classes) {
         const result = await executeQuery(
-          `INSERT IGNORE INTO Clase (nombre, dadoVida) VALUES (?, ?)`,
-          [clase.name, clase.dadoVida]
+          `INSERT IGNORE INTO Clase (id, nombre, dadoVida) VALUES (?, ?, ?)`,
+          [clase.id, clase.name, clase.dadoVida]
         );
-        classIds.push(result.result.lastInsertRowid || result.result.insertId);
       }
 
       const abilities = [
         // Barbarian
         {
-          clase: classIds[0],
+          clase: 1,
+          id: 1,
           nombre: "Furia",
           descripcion: "Luchas con una ferocidad primitiva en la batalla.",
         },
         {
-          clase: classIds[0],
+          clase: 1,
+          id: 2,
           nombre: "Ataque temerario",
           danyo: "Daño igual al ataque normal",
           bonus: "STR",
@@ -61,14 +61,16 @@ export function useMisc() {
         },
         // Wizard
         {
-          clase: classIds[1],
+          clase: 2,
+          id: 3,
           nombre: "Bola de fuego",
           danyo: "8d6",
           bonus: "INT",
           descripcion: "Un rayo brillante surge de tu dedo índice hasta un punto que elijas dentro del alcance y explota con un leve estruendo en un estallido de llamas.",
         },
         {
-          clase: classIds[1],
+          clase: 2,
+          id: 4,
           nombre: "Armadura de mago",
           danyo: "0",
           bonus: "INT",
@@ -76,14 +78,16 @@ export function useMisc() {
         },
         // Rogue
         {
-          clase: classIds[2],
+          clase: 3,
+          id: 5,
           nombre: "Ataque furtivo",
           danyo: "Daño igual al ataque normal + 1d6",
           bonus: "",
           descripcion: "Sabes aprovechar la distracción de un enemigo para atacarlo por la espalda. Una vez por turno, puedes infligir daño adicional a una criatura a la que impactes con un ataque si tienes ventaja en la tirada de ataque.",
         },
         {
-          clase: classIds[2],
+          clase: 3,
+          id: 6,
           nombre: "Evasión",
           danyo: "0",
           bonus: "",
@@ -93,15 +97,13 @@ export function useMisc() {
 
       for (const ability of abilities) {
         const result = await executeQuery(
-          `INSERT IGNORE INTO Habilidad (nombre, danyo, bonus, descripcion) VALUES (?, ?, ?, ?)`,
-          [ability.nombre, ability.danyo, ability.bonus, ability.descripcion]
+          `INSERT IGNORE INTO Habilidad (id, nombre, danyo, bonus, descripcion) VALUES (?, ?, ?, ?, ?)`,
+          [ability.id, ability.nombre, ability.danyo, ability.bonus, ability.descripcion]
         );
-
-        const abilityId = result.result.lastInsertRowid || result.result.insertId;
 
         await executeQuery(
           `INSERT IGNORE INTO Clase_tiene_Habilidad (Clase_id, Habilidad_id) VALUES (?, ?)`,
-          [ability.clase, abilityId]
+          [ability.clase, ability.id]
         );
       }
 

@@ -16,14 +16,14 @@ const handleLogin = async () => {
   router.push("/");
 };
 
-const handleRegister = () => {
+const handleRegister = async () => {
   let username = document.getElementById("username");
   let password = document.getElementById("password");
   if (!username.value || !password.value) {
     return;
   }
-  register(username.value, password.value);
-  handleLogin();
+  await register(username.value, password.value);
+  await handleLogin();
 };
 
 </script>
