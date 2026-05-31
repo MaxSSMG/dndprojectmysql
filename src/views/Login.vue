@@ -19,7 +19,7 @@ const handleLogin = async () => {
   }
   const log = await login(username.value, password.value);
   console.log(log);
-  if (log) {
+  if (log?.length > 0) {
     router.push("/");
   } else {
     popupVisible.value = true;
