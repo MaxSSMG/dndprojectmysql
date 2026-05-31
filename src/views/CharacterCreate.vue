@@ -55,7 +55,7 @@ import { useClases } from "@/composables/useClases";
 import { useStats } from "@/composables/useStats";
 
 const { createCharacter } = useCharacters();
-const { createStats, getLastStats } = useStats();
+const { createStats } = useStats();
 const { clases, loadClases } = useClases();
 const router = useRouter();
 
@@ -88,8 +88,7 @@ async function create() {
   let clase = document.querySelector('input[name="clase"]:checked').value;
   let vida = document.querySelector('input[name="clase"]:checked').classList[0];
   const statValues = stats.value.map((stat) => stat.valor);
-  await createStats(...statValues);
-  const statsId = await getLastStats();
+  const statsId = await createStats(...statValues);
   await createCharacter(nombre, nivel, makeHP(vida, nivel), clase, statsId, $cookies.get("userId"));
   router.push("/CharacterSelect");
 }

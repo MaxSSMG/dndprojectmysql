@@ -47,7 +47,7 @@ import { useClases } from "@/composables/useClases";
 import { useStats } from "@/composables/useStats";
 
 const { clase, abilityScores, character, loadCharacterFromId, editCharacter } = useCharacters();
-const { createStats, getLastStats } = useStats();
+const { createStats } = useStats();
 const { clases, loadClases } = useClases();
 const route = useRoute();
 const router = useRouter();
@@ -78,8 +78,7 @@ async function create() {
   let clase = document.querySelector('input[name="clase"]:checked').value;
   let vida = document.querySelector('input[name="clase"]:checked').classList[0];
   const statValues = Object.values(abilityScores.value);
-  await createStats(...statValues);
-  const statsId = await getLastStats();
+  const statsId = await createStats(...statValues);
   await editCharacter(nombre, nivel, makeHP(vida, nivel), clase, statsId, route.params.id);
   router.push("/CharacterSelect");
 }
