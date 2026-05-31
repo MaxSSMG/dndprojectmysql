@@ -29,6 +29,11 @@ const emit = defineEmits(["close"]);
       <p>Se ha cambiado el nombre de la campaña.</p>
     </div>
 
+    <div v-if="type === 'login'">
+      <h2>Usuario no existe</h2>
+      <p>El usuario ingresado no existe.</p>
+    </div>
+
     <button class="btn btn-danger" @click="emit('close')">
       Cerrar
     </button>

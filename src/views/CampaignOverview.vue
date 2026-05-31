@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useCharacters } from "@/composables/useCharacters";
 import { useCampaigns } from "@/composables/useCampaigns";

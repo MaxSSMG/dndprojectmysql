@@ -1,6 +1,10 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { useUser } from "@/composables/useUser.js";
+import PopupCreation from "@/components/PopupCreation.vue";
+
+const popupVisible = ref(false);
+const popupType = ref("");
 
 $cookies.remove('userId');
 const { login, register } = useUser();
@@ -12,8 +16,13 @@ const handleLogin = async () => {
   if (!username.value || !password.value) {
     return;
   }
-  await login(username.value, password.value);
-  router.push("/");
+  const login = await login(username.value, password.value);
+  if (login.length > 0) {
+    router.push("/");
+  } else {
+    popupVisible.value = true;
+    popupType.value = "login";
+  }
 };
 
 const handleRegister = async () => {
@@ -49,5 +58,12 @@ const handleRegister = async () => {
       </div>
 
     </div>
+  </div>
+  <div v-if="popupVisible" class="popup-overlay">
+    <PopupCreation
+    :visible="popupVisible"
+    :type="popupType"
+    @close="popupVisible = false"
+    />
   </div>
 </template>
