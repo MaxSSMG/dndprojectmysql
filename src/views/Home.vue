@@ -24,7 +24,7 @@ onMounted(async () => {
 
   await loadUsersCampaigns($cookies.get("userId"));
   await campaignMember($cookies.get("userId"));
-  await demoData();
+  //await demoData();
 });
 </script>
 
