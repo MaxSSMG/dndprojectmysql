@@ -53,7 +53,7 @@ onMounted(() => {
         </div>
         <router-link
           :to="'/CampaignOverview/' + campaign.campId"
-          class="d-flex flex-column justify-content-start ms-3"
+          class="d-flex flex-column justify-content-start ms-3 campaignCard"
           style="text-decoration: none; color: white;"
         >
           <h5 class="card-title">{{ campaign.nombre }}</h5>
@@ -79,7 +79,7 @@ onMounted(() => {
         <router-link 
           :to="'/CampaignOverview/' + campaign.campId" 
           style="text-decoration: none; color: white;" 
-          class="d-flex flex-column justify-content-start ms-3"
+          class="d-flex flex-column justify-content-start ms-3 campaignCard"
         >
           <h5 class="card-title">{{ campaign.nombre }}</h5>
           <p class="card-text align-self-start">DM: {{ campaign.dm }}</p>
