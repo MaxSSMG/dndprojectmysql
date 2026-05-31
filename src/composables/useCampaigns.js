@@ -12,7 +12,7 @@ export function useCampaigns() {
   async function loadCampaigns(id) {
     try {
       const result = await executeQuery(
-        `SELECT c.id, c.nombre, u.nombre FROM Campanya c 
+        `SELECT c.id, c.nombre AS campaignName, u.nombre AS dmName FROM Campanya c 
             LEFT JOIN Usuario u ON c.campanyaDM = u.id
             WHERE campanyaDM != ?`,
         [id],
@@ -32,9 +32,9 @@ export function useCampaigns() {
       const result = await executeQuery(
         `SELECT
           c.id,
-          c.nombre,
+          c.nombre AS campaignName,
           c.campanyaDM,
-          u.nombre
+          u.nombre AS dmName
         FROM Campanya c
         LEFT JOIN Campanya_tiene_Personaje chp ON c.id = chp.Campanya_id
         LEFT JOIN Usuario u ON c.campanyaDM = u.id
@@ -56,7 +56,7 @@ export function useCampaigns() {
   async function loadUsersCampaigns(id) {
     try {
       const result = await executeQuery(
-        `SELECT c.id, c.nombre, u.nombre FROM Campanya c
+        `SELECT c.id, c.nombre AS campaignName, u.nombre AS dmName FROM Campanya c
             LEFT JOIN Usuario u ON c.campanyaDM = u.id
             WHERE campanyaDM = ?`,
         [id],
@@ -106,7 +106,7 @@ export function useCampaigns() {
   async function searchCampaign(nom) {
     try {
       const result = await executeQuery(
-        `SELECT c.id, c.nombre, u.nombre FROM Campanya c
+        `SELECT c.id, c.nombre AS campaignName, u.nombre AS dmName FROM Campanya c
             LEFT JOIN Usuario u ON c.campanyaDM = u.id
             WHERE c.nombre LIKE ?`,
         [`%${nom}%`],
@@ -136,7 +136,7 @@ export function useCampaigns() {
   async function campaignMember(id) {
     try {
       const result = await executeQuery(
-        `SELECT c.id, c.nombre, u.nombre
+        `SELECT c.id, c.nombre AS campaignName, u.nombre AS dmName
           FROM Campanya c
           LEFT JOIN Usuario u ON c.campanyaDM = u.id
           WHERE EXISTS (

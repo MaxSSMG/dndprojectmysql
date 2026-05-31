@@ -14,21 +14,21 @@ export function useCharacters() {
     try {
       const result = await executeQuery(
         `SELECT
-          p.id,
-          p.nombre,
+          p.id AS charId,
+          p.nombre AS charName,
           p.personajeNivel,
           p.health,
           p.maxHealth,
-          c.id,
-          c.nombre,
+          c.id AS classId,
+          c.nombre AS className,
           s.str,
           s.dex,
           s.con,
           s.intel,
           s.wis,
           s.cha,
-          ca.id,
-          ca.nombre
+          ca.id AS campaignId,
+          ca.nombre AS campaignName
         FROM Personaje p
         JOIN Stats s ON p.personajeStats = s.id
         LEFT JOIN Clase c ON p.personajeClase = c.id
@@ -79,10 +79,10 @@ export function useCharacters() {
       const result = await executeQuery(
         `SELECT
           p.id,
-          p.nombre,
+          p.nombre AS charName,
           p.personajeNivel,
-          c.nombre,
-          ca.nombre
+          c.nombre AS className,
+          ca.nombre AS campaignName
         FROM Personaje p
         LEFT JOIN Clase c ON p.personajeClase = c.id
         LEFT JOIN Campanya_tiene_Personaje chp ON p.id = chp.Personaje_id
@@ -113,10 +113,10 @@ export function useCharacters() {
       const result = await executeQuery(
         `SELECT
           p.id,
-          p.nombre,
+          p.nombre AS charName,
           p.personajeNivel,
-          c.nombre,
-          ca.nombre
+          c.nombre AS className,
+          ca.nombre AS campaignName
         FROM Personaje p
         LEFT JOIN Clase c ON p.personajeClase = c.id
         LEFT JOIN Campanya_tiene_Personaje chp ON p.id = chp.Personaje_id
