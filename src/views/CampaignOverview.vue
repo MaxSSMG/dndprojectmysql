@@ -52,12 +52,12 @@ onMounted(async () => {
     :value="campaign?.nombre"
     @keyup.enter="handleEdit()"
   />
-  <div class="content characterSelect row">
+  <div class="content characterSelect d-flex flex-row">
     <div v-for="character in characters" :key="character.charId">
-      <div class="col-4">
+      <div class="m-auto">
         <router-link
           :to="'/Character/' + character.charId"
-          class="d-flex flex-column justify-content-center p-3"
+          class="d-flex flex-column justify-content-center p-3 character"
         >
           <div class="d-flex flex-row">
             <img

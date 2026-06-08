@@ -30,7 +30,7 @@ onMounted(async () => {
   <h2>Añadir personaje a la campaña</h2>
   <div class="content addToCampaign row" v-if="characters">
     <div v-for="character in characters" :key="character.charId"
-      class="d-flex flex-column col-4 justify-content-center p-3">
+      class="d-flex flex-column col-4 justify-content-center p-3 character">
       <div class="d-flex flex-row">
         <img src="../assets/placeholder.png" alt="" class="placeholder-charselect">
       </div>
@@ -43,7 +43,7 @@ onMounted(async () => {
         <div class="d-flex flex-row">{{ character.campanya }}</div>
       </div>
       <div>
-        <button @click="handleAdding(character.charId)">Añadir a la campaña</button>
+        <button class="btn btn-danger" @click="handleAdding(character.charId)">Añadir a la campaña</button>
       </div>
     </div>
     </div>

@@ -14,14 +14,11 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the built frontend
 app.use(express.static(join(__dirname, '../dist')));
 
-// MySQL connection pool
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
@@ -37,7 +34,6 @@ console.log('DB_USER:', process.env.DB_USER);
 console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? '***' : 'undefined');
 console.log('DB_NAME:', process.env.DB_NAME);
 
-// API Routes
 app.post('/api/query', async (req, res) => {
   try {
     const { query, params = [] } = req.body;
